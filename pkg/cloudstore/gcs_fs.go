@@ -159,6 +159,12 @@ func (fs *gcsFs) OpenFile(name string, flag int, perm os.FileMode) (File, error)
 
 		// Open for writing, potentially wrapped with a compressor.
 		var w = fs.client.Bucket(bucket).Object(path).NewWriter(context.Background())
+		//TODO(azim): this is a workaround for PS-1058. The cloud storage backend sometimes doesn't accept earlier
+		//chunks of a file, and subsequent upload attempts for file offsets starting at >0 fail with a 503 error.
+		//This triggers an infinite loop, meaning that the persister risks hanging indefinitely, which could lead to
+		//broker evictions from Kubernetes and eventually data loss. By disabling chunking, if a request to the GCS
+		//backend fails, we'll always try to send the entire file again.
+		w.ChunkSize = 0
 		var compressor io.WriteCloser
 
 		// TODO(johnny, PUB-4052): Hack to skip gzip compression on recovery logs.
