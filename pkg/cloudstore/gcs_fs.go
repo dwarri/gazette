@@ -38,6 +38,13 @@ type gcsFs struct {
 	client *storage.Client
 	// Options required for generating signed URLs.
 	signOptions storage.SignedURLOptions
+	// Chunk Size to use in multi-part file uploads
+	chunkSize int
+}
+
+// SetChunkSize sets the default file upload chunk size (set to 0 to disable multi-part uploads)
+func (fs *gcsFs) SetChunkSize(size int) {
+	fs.chunkSize = size
 }
 
 // Returns a gcsFs from the specified |credentials| in JSON format,
@@ -164,7 +171,7 @@ func (fs *gcsFs) OpenFile(name string, flag int, perm os.FileMode) (File, error)
 		//This triggers an infinite loop, meaning that the persister risks hanging indefinitely, which could lead to
 		//broker evictions from Kubernetes and eventually data loss. By disabling chunking, if a request to the GCS
 		//backend fails, we'll always try to send the entire file again.
-		w.ChunkSize = 0
+		w.ChunkSize = fs.chunkSize
 		var compressor io.WriteCloser
 
 		// TODO(johnny, PUB-4052): Hack to skip gzip compression on recovery logs.
