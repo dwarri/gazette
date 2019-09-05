@@ -2,7 +2,7 @@
 
 
 [[projects]]
-  digest = "1:25e90949d88e66bcbb646626a293c77a97237b37a8f854c1e8ae817b74b5c2cf"
+  digest = "1:62010c37b093a63520b29cefd17edb3aa43735b265d2f2ede22e85fa86bf4cf0"
   name = "cloud.google.com/go"
   packages = [
     "compute/metadata",
@@ -14,8 +14,8 @@
     "storage",
   ]
   pruneopts = ""
-  revision = "c9474f2f8deb81759839474b6bd1726bbfe1c1c4"
-  version = "v0.36.0"
+  revision = "d1af076dc3f6a314e9dd6610fe83b0f7afaff6d6"
+  version = "v0.45.1"
 
 [[projects]]
   digest = "1:29b1e6604e762715716cae79145c8732a964b8fe564cc330de1495090fbc777a"

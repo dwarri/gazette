@@ -46,3 +46,8 @@ required = [
   name = "github.com/tecbot/gorocksdb"
   version = "=v1.2.0"
   source = "https://github.com/LiveRamp/gorocksdb.git"
+
+# Use the latest google-cloud-go to get fixed GCS upload retry behavior
+[[constraint]]
+  name = "cloud.google.com/go"
+  version = "0.45.0"
