@@ -27,7 +27,6 @@ required = [
 # Use an old, pinned version of the cockroach DB keyspace encoding utilities.
 [[constraint]]
   name = "github.com/cockroachdb/cockroach"
-  branch = "master"
   source = "https://github.com/jgraettinger/cockroach-encoding.git"
 
 # Require `master` of go-flags, which includes the "env-namespace" feature

@@ -7,7 +7,7 @@ RUN curl -fsSL -o /usr/local/bin/dep \
  && chmod +x /usr/local/bin/dep
 
 COPY Gopkg.toml Gopkg.lock /go/src/github.com/LiveRamp/gazette/
-RUN cd /go/src/github.com/LiveRamp/gazette/ && dep ensure -vendor-only
+RUN cd /go/src/github.com/LiveRamp/gazette/ && dep ensure -v --vendor-only
 
 # Copy, install, and test library and binary packages.
 COPY pkg /go/src/github.com/LiveRamp/gazette/pkg
