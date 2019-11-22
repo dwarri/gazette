@@ -1,2 +1,4 @@
 .build
 .build-ci
+.vagrant
+ubuntu-*.log
